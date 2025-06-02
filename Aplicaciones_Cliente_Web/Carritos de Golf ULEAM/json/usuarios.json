@@ -1,0 +1,20 @@
+[
+    {
+      "nombre": "Ronny",
+      "email": "ronnypilay@gmail.com",
+      "password": "ronnypilay",
+      "tipo": "CLIENTE"
+    },
+    {   
+      "nombre": "Ricky",
+      "email": "rickypilay@gmail.com",
+      "password": "rickypilay",
+      "tipo": "CHOFER"
+    },
+    {
+      "nombre": "Yeron",
+      "email": "yeronfontabella@gmail.com",
+      "password": "yeronfontabella",
+      "tipo": "ADMINISTRADOR"
+    }
+  ]
