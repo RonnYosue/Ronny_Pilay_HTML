@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GolfKart UC</title>
+  <link rel="icon" href="image/gk.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/styles_usuario_final.css">
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <div class="topbar">
+    <h1 class="titulo-animado">
+      <span>G</span><span>O</span><span>L</span><span>F</span><span>K</span><span>A</span><span>R</span><span>T</span>
+    </h1>
+    <div class="topbar-logo-wrapper">
+      <img src="image/loguito-uleam.png" class="topbar-logo" alt="Logo Uleam">
+    </div>
+    <div id="saludo" class="saludo-usuario"></div>
+  </div>
+  
+
+
+  <!-- Barra lateral -->
+  <div class="sidebar" id="sidebar">
+    <button class="menu-button" id="toggleSidebar">
+      <img src="image/menu.png" alt="Menú">
+    </button>
+    <button onclick="mostrarModal('modalReserva')">Reservar</button>
+    <button onclick="realizarReserva()">Ver mis Reservas</button>
+    <!-- <button onclick="iniciarRecorrido()">Iniciar recorrido</button>-->
+    <button onclick="cerrarSesion()" style="background-color: #b82633;">Cerrar Sesión</button>
+    <div style="margin-top: auto;">
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="main-content">
+    <div id="map"></div>
+  </div>
+
+  <!-- Modal de Ver Reservas -->
+  <div id="modalReservas" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal('modalReservas')">&times;</span>
+      <h2>Mis Reservas</h2>
+      <div id="listaReservas"></div>
+    </div>
+  </div>
+
+  <!-- Modal de reserva -->
+  <div id="modalReserva" class="modal hidden">
+    <div class="modal-content">
+      <h2>Reservar carrito</h2>
+      <form id="formReservas">
+        <p>¿Deseas hacer una reserva de este carrito?</p>
+        <label for="fecha">Elige una fecha:</label>
+        <input type="date" id="fecha" name="fecha">
+        <label for="hora">Elige una hora:</label>
+        <input type="time" id="hora" name="hora">
+
+        <label for="inicio">Seleccione el inicio:</label>
+        <select id="inicio" name="inicio">
+          <option value="1">PUERTA UNO</option>
+          <option value="2">PARANINFO</option>
+          <option value="3">FACULTAD EDUCACION</option>
+          <option value="4">FACULTAD ODONTOLOGIA </option>
+          <option value="5">TASTY FOOD UNO </option>
+          <option value="6">FACULTAD TURISMO </option>
+          <option value="7">FACULTAD GASTRONOMIA</option>
+          <option value="8">CANCHAS MULTIPLES</option>
+          <option value="10">FACULTAD ARQUITECTURA</option>
+          <option value="13">TASTY FOOD DOS</option>
+          <option value="16">FACULTAD INGENIERIA</option>
+          <option value="17">TASTY FOOD TRES</option>
+          <option value="19">FACCI</option>
+          <option value="20">INSTITUTO DE IDIOMAS</option>
+          <option value="22">DANNU</option>
+          <option value="24">FACULTAD DERECHO</option>
+          <option value="26">CINE ULEAM</option>
+          <option value="27">PUERTA DOS</option>
+          <option value="31">FACULTAD ENFERMERIA</option>
+          <option value="32">FACULTAD MEDICINA</option>
+          <option value="35">FACULTAD PSICOLOGIA</option>
+          <option value="36">FACULTAD FISIOTERAPIA</option>
+          <option value="37">FACULTAD AGROPECUARIA</option>
+          <option value="39">FACULTAD TRABAJO SOCIAL</option>
+          <option value="41">ESCUELA CONDUCCION</option>
+          <option value="42">FACULTAD BIOLOGIA</option>
+          <option value="43">TERCERA PUERTA</option>
+          <option value="44">FACULTAD AUDITORIA</option>
+          <option value="45">FACULTAD ING INDUSTRIAL</option>
+          <option value="47">FACULTAD ECONOMIA </option>
+          <option value="48">FACCO</option>
+          <option value="21">FACULTAD EDUCACION DOS</option>
+
+        </select>
+        <label for="destino">Seleccione el destino:</label>
+        <select id="destino" name="destino">
+          <option value="1">PUERTA UNO</option>
+          <option value="2">PARANINFO</option>
+          <option value="3">FACULTAD EDUCACION</option>
+          <option value="4">FACULTAD ODONTOLOGIA </option>
+          <option value="5">TASTY FOOD UNO </option>
+          <option value="6">FACULTAD TURISMO </option>
+          <option value="7">FACULTAD GASTRONOMIA</option>
+          <option value="8">CANCHAS MULTIPLES</option>
+          <option value="10">FACULTAD ARQUITECTURA</option>
+          <option value="13">TASTY FOOD DOS</option>
+          <option value="16">FACULTAD INGENIERIA</option>
+          <option value="17">TASTY FOOD TRES</option>
+          <option value="19">FACCI</option>
+          <option value="20">INSTITUTO DE IDIOMAS</option>
+          <option value="22">DANNU</option>
+          <option value="24">FACULTAD DERECHO</option>
+          <option value="26">CINE ULEAM</option>
+          <option value="27">PUERTA DOS</option>
+          <option value="31">FACULTAD ENFERMERIA</option>
+          <option value="32">FACULTAD MEDICINA</option>
+          <option value="35">FACULTAD PSICOLOGIA</option>
+          <option value="36">FACULTAD FISIOTERAPIA</option>
+          <option value="37">FACULTAD AGROPECUARIA</option>
+          <option value="39">FACULTAD TRABAJO SOCIAL</option>
+          <option value="41">ESCUELA CONDUCCION</option>
+          <option value="42">FACULTAD BIOLOGIA</option>
+          <option value="43">TERCERA PUERTA</option>
+          <option value="44">FACULTAD AUDITORIA</option>
+          <option value="45">FACULTAD ING INDUSTRIAL</option>
+          <option value="47">FACULTAD ECONOMIA </option>
+          <option value="48">FACCO</option>
+          <option value="21">FACULTAD EDUCACION DOS</option>
+        </select>
+        
+        <label for="asientos">Seleccione la cantidad de asientos:</label>
+        <select name="asientos" id="asientos">
+          <option value="cantidadAsientos">1</option>
+          <option value="cantidadAsientos">2</option>
+          <option value="cantidadAsientos">3</option>
+        </select>
+
+        <button type="button" onclick="confirmarReserva()">Confirmar</button>
+        <button type="button" onclick="cerrarModal('modalReserva')">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/usuario_final.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxCvGD2hy58PYPqccAFlGCMiI7YOX0_rQ&callback=initMap"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

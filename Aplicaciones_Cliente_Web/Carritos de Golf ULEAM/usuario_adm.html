@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GolfKart ADM</title>
+  <link rel="icon" href="image/gk.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/syles_usuario_adm.css">
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <div class="topbar">
+    <h1 class="titulo-animado">
+      <span>G</span><span>O</span><span>L</span><span>F</span><span>K</span><span>A</span><span>R</span><span>T</span>
+    </h1>
+    <div class="topbar-logo-wrapper">
+      <img src="image/loguito-uleam.png" class="topbar-logo" alt="Logo Uleam">
+    </div>
+    <div id="saludo" class="saludo-usuario"></div>
+  </div>
+
+  <!-- Barra lateral -->
+  <div class="sidebar" id="sidebar">
+    <button class="menu-button" id="toggleSidebar">
+        <img src="image/menu.png" alt="Menú">
+      </button>           
+    <button onclick="window.location.href='registrar_usuario.html'">Crear Usuario</button>
+    <button onclick="mostrarModal('modalAgregarCarrito')">Agregar Carritos</button>
+    <button onclick="realizarReserva()">Ver Reservas</button>
+    <button onclick="cerrarSesion()"style="background-color: #b82633;">Cerrar Sesión</button>
+    
+
+    <div style="margin-top: auto;">
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="main-content">
+    <div id="map"></div>
+  </div>
+
+  <!-- Modales -->
+  <div id="modalAgregarCarrito" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal('modalAgregarCarrito')">&times;</span>
+      <h2>Agregar Carrito</h2>
+      <form id="formAgregarCarrito">
+        <label for="carritoId">ID del carrito:</label>
+        <input type="text" id="carritoId" name="carritoId" required>
+
+        <label for="ubicacion">Ubicacion Inicial:</label>
+        <select id="ubicacion" name="ubicacion">
+          <option value="1">Ubicacion Predeterminada</option>
+        </select>
+        <label for="asientos">Asientos:</label>
+        <select id="asientos" name="aisentos">
+          <option value="asientos">3</option>
+        </select>
+
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Modal de Ver Reservas -->
+  <div id="modalReservas" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal('modalReservas')">&times;</span>
+      <h2>Reservas</h2>
+      <div id="listaReservas"></div>
+    </div>
+  </div>
+
+  <script src="js/usuario_adm.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxCvGD2hy58PYPqccAFlGCMiI7YOX0_rQ&callback=initMap"></script>
+</body>
+</html>

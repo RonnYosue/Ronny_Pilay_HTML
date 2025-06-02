@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GolfKart CH</title>
+  <link rel="icon" href="image/gk.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/styles_usuario_chofer.css">
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <div class="topbar">
+    <h1 class="titulo-animado">
+      <span>G</span><span>O</span><span>L</span><span>F</span><span>K</span><span>A</span><span>R</span><span>T</span>
+    </h1>
+    <div class="topbar-logo-wrapper">
+      <img src="image/loguito-uleam.png" class="topbar-logo" alt="Logo Uleam">
+    </div>
+    <div id="saludo" class="saludo-usuario"></div>
+  </div>
+  
+
+
+  <!-- Barra lateral -->
+  <div class="sidebar" id="sidebar">
+    <button class="menu-button" id="toggleSidebar">
+      <img src="image/menu.png" alt="Menú">
+    </button>
+    <button onclick="realizarReserva()">Ver Reservas</button>
+    <button onclick="iniciarServicio()">Iniciar Servicio</button>
+    <button onclick="realizarMantenimiento()">Mantenimiento</button>
+    <button onclick="finalizarServicio()" style="background-color: #b82633;">Finalizar Servicio</button>
+    <button onclick="cerrarSesion()" style="background-color: #b82633;">Cerrar Sesión</button>
+
+    
+    <div style="margin-top: auto;">
+    </div>
+    
+  </div>
+  <div id="estado-superior">
+    <span id="punto-estado" class="punto gris"></span>
+    <span id="texto-estado" class="texto-estado">Fuera de servicio</span>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="main-content">
+    <div id="map"></div>
+  </div>
+
+  <!-- Modales-->
+
+  <!-- Modal de Iniciar Servicio -->
+  <div id="modalIniciarServicio" class="modal hidden">
+    <div class="modal-content">
+      <h2>Ingrese el ID del carrito:</h2>
+      <form id="formReservas">
+        <label for="carritoId">ID del carrito:</label>
+        <input type="text" id="carritoId" name="carritoId" required>
+        <button type="button" onclick="confirmarinicioServicio()">Confirmar</button>
+        <button type="button" onclick="cerrarModal('modalIniciarServicio')">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  <!-- Modal de Mantenimiento -->
+  <div id="modalRealizarMantenimiento" class="modal hidden">
+    <div class="modal-content">
+      <h2>Mantenimiento:</h2>
+      <form id="formReservas">
+        <label for="carritoId">ID del carrito:</label>
+        <input type="text" id="carritoId" name="carritoId" required>
+        <label for="carritoId">Tipo de Mantenimiento:</label>
+        <input type="text" id="carritoId" name="carritoId" required>
+        <button type="button" onclick="confirmarRealizarMantenimiento()">Confirmar</button>
+        <button type="button" onclick="cerrarModal('modalRealizarMantenimiento')">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  <!-- Modal de Ver Reservas -->
+  <div id="modalReservas" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal('modalReservas')">&times;</span>
+      <h2>Reservas</h2>
+      <div id="listaReservas"></div>
+    </div>
+  </div>
+
+  <script src="js/usuario_chofer.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxCvGD2hy58PYPqccAFlGCMiI7YOX0_rQ&callback=initMap"></script>
+</body>
+</html>
