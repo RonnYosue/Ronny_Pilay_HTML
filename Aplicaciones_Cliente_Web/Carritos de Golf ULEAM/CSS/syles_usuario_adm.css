@@ -1,0 +1,399 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Mapa ocupa todo el fondo */
+  #map {
+    width: 1000px;         /* O el valor que desees */
+    height: 700px;        /* O el valor que desees */
+    border-radius: 8px;      /* Bordes redondeados, opcional */
+    margin: 30px auto;       /* Centra el mapa en la pantalla */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    /*margin-left: -50px;*/
+  }
+  
+  /* Botones a la izquierda en columna */
+  .side-controls {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 5;
+  }
+  
+  .side-controls button {
+    padding: 15px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #109b23;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .side-controls button:hover {
+    background-color: #109b23;
+  }
+  
+  /* Botón salir arriba a la derecha */
+  .exit-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 5;
+  }
+  
+  .exit-button button {
+    padding: 15px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #e63946;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .exit-button button:hover {
+    background-color: #b82633;
+  }
+  
+  /* Modal */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    width: 300px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+  }
+  
+  .modal-content .close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .modal-content input,
+  .modal-content button {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .modal-content button {
+    background-color: #109b23;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal.hidden {
+    display: none;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  /* para el titlo principal */
+  .titulo-animado {
+    font-size: 60px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    text-align: center;
+    color: green;
+  }
+  
+  .titulo-animado span {
+    display: inline-block;
+    color: green;
+    -webkit-text-stroke: 1px darkgreen; /* borde */
+    text-shadow: 0 0 5px #000, 0 0 10px #000; /* sombra oscura */
+    animation: iluminar 1.5s infinite;
+  }
+  
+  /* Animación de brillo secuencial */
+  .titulo-animado span:nth-child(1) { animation-delay: 0s; }
+  .titulo-animado span:nth-child(2) { animation-delay: 0.2s; }
+  .titulo-animado span:nth-child(3) { animation-delay: 0.4s; }
+  .titulo-animado span:nth-child(4) { animation-delay: 0.6s; }
+  .titulo-animado span:nth-child(5) { animation-delay: 0.8s; }
+  .titulo-animado span:nth-child(6) { animation-delay: 1s; }
+  .titulo-animado span:nth-child(7) { animation-delay: 1.2s; }
+  
+  @keyframes iluminar {
+    0%, 100% {
+      text-shadow: 0 0 5px #000, 0 0 10px #000;
+      transform: scale(1);
+    }
+    50% {
+      text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
+      transform: scale(1.1);
+    }
+  }
+
+
+/* Barra superior */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #3F3F3F;
+    border-bottom: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 10;
+  }
+  
+  /* Ajuste del título */
+  .topbar .titulo-animado {
+    font-size: 36px;
+    margin: 0;
+  }
+  /*imagen topbar */
+
+  .topbar-logo-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .topbar-logo {
+    height: 50px;
+    width: auto;
+  }
+  
+  /* Barra lateral */
+  .sidebar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 220px;
+    height: calc(100vh - 80px);
+    background-color: #3F3F3F;
+    padding: 20px 10px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 9;
+  }
+  
+  .sidebar button {
+    width: 100%;
+    padding: 15px 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #109b23;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar button:hover {
+    background-color: #0d7c1a;
+  }
+  
+  /* Botón cerrar sesión en topbar */
+  .topbar .exit-button button {
+    background-color: #e63946;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .topbar .exit-button button:hover {
+    background-color: #b82633;
+  }
+  
+  /* Contenedor del mapa y contenido principal */
+  .main-content {
+    margin-left: 220px; /* ancho de sidebar */
+    margin-top: 80px; /* alto de topbar */
+    padding: 20px;
+  }
+  
+  #map {
+    width: 90%;
+    height: 700px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  /* Sidebar replegable */
+.sidebar.collapsed {
+    width: 60px;
+    overflow: hidden;
+    align-items: center;
+  }
+  
+  .sidebar.collapsed button {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0;
+    padding: 15px 0;
+  }
+  
+  .sidebar.collapsed #toggleSidebar {
+    font-size: 16px;
+  }
+  
+  /* Ajustar contenido principal si sidebar está colapsado */
+  .main-content.collapsed {
+    margin-left: 60px;
+  }
+
+    button.menu-button {
+    all: unset; /* 🔥 Borra todos los estilos heredados del botón */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+  }
+  
+  button.menu-button img {
+    width: 32px;
+    height: 32px;
+    display: block;
+  }
+  button.menu-button {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+  }
+  
+  button.menu-button img {
+    width: 60px;
+    height: 60px;
+    display: block;
+  }
+
+  
+  select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+    appearance: none; /* elimina flecha por defecto en algunos navegadores */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #109b23;
+    background-color: #fff;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .saludo-usuario {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #109b23;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+  }
+  
+
+  
+
+
+  
+  
+  
