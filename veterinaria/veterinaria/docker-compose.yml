@@ -1,0 +1,68 @@
+version: '3.9'
+
+services:
+  pg-master:
+    image: postgres:17
+    container_name: pg-sucursal1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: veterinaria
+    volumes:
+      - ./sucursal1/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./sucursal1/pg_hba.conf:/etc/postgresql/pg_hba.conf
+      - ./sucursal1/postgresql.conf:/etc/postgresql/postgresql.conf
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf -c hba_file=/etc/postgresql/pg_hba.conf
+    ports:
+      - "5433:5432"
+    networks:
+      red_interna_abdd:
+        ipv4_address: 172.25.0.10
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pg-trans:
+    image: postgres:17
+    container_name: pg-sucursal2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: veterinaria2
+    volumes:
+      - ./sucursal2/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./sucursal2/pg_hba.conf:/etc/postgresql/pg_hba.conf
+      - ./sucursal1/postgresql.conf:/etc/postgresql/postgresql.conf
+    command: postgres -c hba_file=/etc/postgresql/pg_hba.conf -c config_file=/etc/postgresql/postgresql.conf
+    ports:
+      - "5434:5432"
+    networks:
+      red_interna_abdd:
+        ipv4_address: 172.25.0.11
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  symmetric-ds:
+    build: 
+      context: ./symmetricds
+    container_name: symmetricds
+    ports:
+      - "31415:31415"
+    volumes:
+      - ./sucursal1/engine.properties:/opt/symmetricds/engines/sucursal1-node.properties
+      - ./sucursal2/engine.properties:/opt/symmetricds/engines/sucursal2-node.properties
+    networks:
+      red_interna_abdd:
+        ipv4_address: 172.25.0.12
+
+networks:
+  red_interna_abdd:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/24

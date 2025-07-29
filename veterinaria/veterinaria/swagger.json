@@ -1,0 +1,77 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Sistema de Veterinaria",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/mascotas": {
+      "get": {
+        "summary": "Listar mascotas",
+        "responses": {
+          "200": {
+            "description": "Lista de mascotas"
+          }
+        }
+      }
+    },
+    "/duenos": {
+      "get": {
+        "summary": "Listar dueños",
+        "responses": {
+          "200": {
+            "description": "Lista de dueños"
+          }
+        }
+      }
+    },
+    "/tratamientos": {
+      "get": {
+        "summary": "Listar tratamientos",
+        "responses": {
+          "200": {
+            "description": "Lista de tratamientos"
+          }
+        }
+      }
+    },
+    "/citas": {
+      "get": {
+        "summary": "Listar citas",
+        "responses": {
+          "200": {
+            "description": "Lista de citas"
+          }
+        }
+      }
+    },
+    "/veterinarios": {
+      "get": {
+        "summary": "Listar veterinarios",
+        "responses": {
+          "200": {
+            "description": "Lista de veterinarios"
+          }
+        }
+      }
+    },
+    "/mascotas/{id}/tratamientos": {
+      "get": {
+        "summary": "Consultar tratamientos de una mascota",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tratamientos de una mascota"
+          }
+        }
+      }
+    }
+  }
+}
